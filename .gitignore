@@ -147,4 +147,6 @@ Temporary Items
 !.vscode/extensions.json
 
 
+.idea
+
 # End of https://www.gitignore.io/api/,visualstudiocode,macos,android,android studio,java,kotlin
