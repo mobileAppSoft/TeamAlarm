@@ -1,16 +1,19 @@
-package by.home.dartlen.dindindon
+package by.home.dartlen.dindindon.main
 
 import androidx.lifecycle.ViewModel
 import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkManager
+import by.home.dartlen.dindindon.AlarmClock
 import java.util.concurrent.TimeUnit
 
-class AlarmClockViewModel: ViewModel(){
+class MainViewModel : ViewModel() {
 
-    lateinit var alarmClock:PeriodicWorkRequest
-    init { }
+    lateinit var alarmClock: PeriodicWorkRequest
 
-    fun start(){
+    init {
+    }
+
+    fun start() {
         alarmClock = PeriodicWorkRequest.Builder(AlarmClock::class.java, 24, TimeUnit.HOURS)
                 .addTag("alarm")
                 .build()
@@ -18,10 +21,9 @@ class AlarmClockViewModel: ViewModel(){
         WorkManager.getInstance().enqueue(alarmClock)
     }
 
-    fun stop(){
+    fun stop() {
         WorkManager.getInstance().cancelWorkById(alarmClock.id)
     }
-
 
 
 }

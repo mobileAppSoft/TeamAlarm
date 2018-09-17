@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/mobile_navigation">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/main">
 
+    <fragment
+        android:id="@+id/main"
+        android:name="by.home.dartlen.dindindon.main.MainFragment"
+        android:label="main">
+        <action
+            android:id="@+id/action_main_to_pendingAlarms"
+            app:destination="@id/pendingAlarms" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/pendingAlarms"
+        android:name="by.home.dartlen.dindindon.pendingalarms.PendingAlarmsFragment"
+        android:label="" />
 </navigation>

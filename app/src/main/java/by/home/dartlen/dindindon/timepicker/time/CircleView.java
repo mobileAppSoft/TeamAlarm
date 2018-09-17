@@ -20,7 +20,6 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-
 import android.util.Log;
 import android.view.View;
 
@@ -96,7 +95,7 @@ public class CircleView extends View {
                 // a slightly higher center. To keep the entire view centered vertically, we'll
                 // have to push it up by half the radius of the AM/PM circles.
                 int amPmCircleRadius = (int) (mCircleRadius * mAmPmCircleRadiusMultiplier);
-                mYCenter -= amPmCircleRadius*0.75;
+                mYCenter -= amPmCircleRadius * 0.75;
             }
 
             mDrawValuesReady = true;

@@ -17,7 +17,6 @@
 package by.home.dartlen.dindindon.timepicker;
 
 import android.content.Context;
-
 import android.util.AttributeSet;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
