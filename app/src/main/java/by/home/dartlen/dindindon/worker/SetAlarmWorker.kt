@@ -1,14 +1,14 @@
-package by.home.dartlen.dindindon
+package by.home.dartlen.dindindon.worker
 
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context.ALARM_SERVICE
 import android.content.Intent
-import android.util.Log
 import androidx.core.app.AlarmManagerCompat
 import androidx.work.Worker
+import by.home.dartlen.dindindon.AlarmActivity
+import by.home.dartlen.dindindon.AlarmReciver
 import by.home.dartlen.dindindon.Constants.TIME_ALARM
-import java.util.*
 
 class SetAlarmWorker : Worker() {
 

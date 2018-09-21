@@ -1,6 +1,5 @@
 package by.home.dartlen.dindindon.list;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,32 +17,15 @@ import by.home.dartlen.dindindon.R;
 
 public class PersonsAdapter extends RecyclerView.Adapter<PersonsAdapter.ViewHolder> implements View.OnClickListener {
 
-    protected List<Person> mPersonList,selected;
-
     private final NotesAdapterInteraction mListener;
+    private List<Person> mPersonList;
+    private List<Person> selected;
 
     public PersonsAdapter(NotesAdapterInteraction notesAdapterInteraction, List<Person> personList) {
-        //context=(Context)notesAdapterInteraction;
         mListener = notesAdapterInteraction;
         mPersonList = personList;
-        this.selected = new ArrayList<>();
+        selected = new ArrayList<>();
 
-    }
-
-
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        public final View mView;
-             public final TextView tvName;
-
-
-        public ViewHolder(View view) {
-            super(view);
-            mView = view;
-           // tvTime = view.findViewById(R.id.tv_time);
-            tvName = view.findViewById(R.id.tv_name);
-//            tvLong = view.findViewById(R.id.tv_longitude);
-//            tvLat = view.findViewById(R.id.tv_latitude);
-        }
     }
 
     @Override
@@ -69,9 +51,6 @@ public class PersonsAdapter extends RecyclerView.Adapter<PersonsAdapter.ViewHold
         else{
             unhighlightView(holder.mView);}
         //-------------
-
-
-
     }
 
     @Override
@@ -105,7 +84,6 @@ public class PersonsAdapter extends RecyclerView.Adapter<PersonsAdapter.ViewHold
         notifyDataSetChanged();
     }
 
-
     @Override
     public int getItemCount() {
         return mPersonList.size();
@@ -113,5 +91,20 @@ public class PersonsAdapter extends RecyclerView.Adapter<PersonsAdapter.ViewHold
 
     public interface NotesAdapterInteraction {
         void onClickItem(Person person);
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        public final View mView;
+        public final TextView tvName;
+
+
+        public ViewHolder(View view) {
+            super(view);
+            mView = view;
+            // tvTime = view.findViewById(R.id.tv_time);
+            tvName = view.findViewById(R.id.tv_name);
+//            tvLong = view.findViewById(R.id.tv_longitude);
+//            tvLat = view.findViewById(R.id.tv_latitude);
+        }
     }
 }

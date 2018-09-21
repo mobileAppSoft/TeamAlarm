@@ -31,7 +31,7 @@ public class UsersFragment extends Fragment
 
     static final String ARGUMENT_ID = "arg_id";
     static final String TAG = "UserFragment";
-   View mRootView;
+    View mRootView;
     int pageNumber;
 
     @Override
@@ -54,7 +54,6 @@ public class UsersFragment extends Fragment
                                                                         Log.d(TAG,String.valueOf(mPersonsAdapter.selected.size()));
                                                                     }
                                                                 }
-
         );
         return rootView;
     }
@@ -80,8 +79,6 @@ public class UsersFragment extends Fragment
        // PlaceDetailsActivity.start(getContext(), person);
     }
 
-
-
     @Override
     public void onDestroy() {
        // AppDatabase.destroyInstance();
@@ -90,7 +87,9 @@ public class UsersFragment extends Fragment
     }
 
     private void setRecyclerView(View rootView, List<Person> list) {
-        if(rootView==null) return;
+        if(rootView==null)
+            return;
+
         RecyclerView recyclerView = rootView.findViewById(R.id.recyclerView);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());

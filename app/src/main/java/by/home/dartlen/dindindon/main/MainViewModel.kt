@@ -3,7 +3,7 @@ package by.home.dartlen.dindindon.main
 import androidx.lifecycle.ViewModel
 import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkManager
-import by.home.dartlen.dindindon.AlarmClock
+import by.home.dartlen.dindindon.worker.AlarmClock
 import java.util.concurrent.TimeUnit
 
 class MainViewModel : ViewModel() {
