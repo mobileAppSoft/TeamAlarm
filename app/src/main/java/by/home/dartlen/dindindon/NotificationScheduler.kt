@@ -94,6 +94,5 @@ class NotificationScheduler {
 
         val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.notify(DAILY_REMINDER_REQUEST_CODE, notification)
-
     }
 }
