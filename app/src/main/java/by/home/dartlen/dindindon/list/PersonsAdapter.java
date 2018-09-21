@@ -1,25 +1,33 @@
 package by.home.dartlen.dindindon.list;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import by.home.dartlen.dindindon.R;
 
 
 public class PersonsAdapter extends RecyclerView.Adapter<PersonsAdapter.ViewHolder> implements View.OnClickListener {
 
-    private List<Person> mPersonList;
+    protected List<Person> mPersonList,selected;
+
     private final NotesAdapterInteraction mListener;
 
     public PersonsAdapter(NotesAdapterInteraction notesAdapterInteraction, List<Person> personList) {
+        //context=(Context)notesAdapterInteraction;
         mListener = notesAdapterInteraction;
         mPersonList = personList;
+        this.selected = new ArrayList<>();
+
     }
 
 
@@ -54,16 +62,42 @@ public class PersonsAdapter extends RecyclerView.Adapter<PersonsAdapter.ViewHold
 
         holder.mView.setOnClickListener(this);
         holder.mView.setTag(position);
+
+        ///---------------
+        if (selected.contains(mPersonList.get(position))){
+            highlightView(holder.mView);}
+        else{
+            unhighlightView(holder.mView);}
+        //-------------
+
+
+
     }
 
     @Override
     public void onClick(View view) {
         int position = (int) view.getTag();
         Person person = mPersonList.get(position);
+        if (selected.contains(person)) {
+            selected.remove(person);
+            unhighlightView(view);
+        } else {
+            selected.add(person);
+            highlightView(view);
+        }
         mListener.onClickItem(person);
         //Опции
        // notifyItemRemoved(position);
        // notifyItemRangeChanged(position, mPersonList.size());
+    }
+
+
+    private void highlightView(View view) {
+        view.setBackgroundColor(ContextCompat.getColor(((Fragment)mListener).getContext(), R.color.colorAccent));
+    }
+
+    private void unhighlightView(View view) {
+        view.setBackgroundColor(ContextCompat.getColor(((Fragment)mListener).getContext(), android.R.color.background_light));
     }
 
     public void updateList(List<Person> updatedList) {

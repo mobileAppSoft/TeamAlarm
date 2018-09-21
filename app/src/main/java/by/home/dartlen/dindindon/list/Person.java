@@ -7,8 +7,8 @@ public class Person {
 
 
 
-    private String token;
-    private String name;
+    public String token;
+    public String name;
 //    private double longitude;
 //    private double latitude;
 

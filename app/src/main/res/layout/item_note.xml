@@ -10,8 +10,8 @@
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     android:layout_marginTop="8dp"
-    android:minHeight="160dp"
-    app:cardCornerRadius="4dp"
+    android:minHeight="4dp"
+    app:cardCornerRadius="20dp"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -26,7 +26,8 @@
             android:id="@+id/tv_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center" />
+            android:gravity="center"
+            android:layout_gravity="center"/>
 
 
     </LinearLayout>

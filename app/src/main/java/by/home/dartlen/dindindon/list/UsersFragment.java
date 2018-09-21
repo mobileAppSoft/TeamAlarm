@@ -26,12 +26,12 @@ import by.home.dartlen.dindindon.R;
 
 public class UsersFragment extends Fragment
         implements PersonsAdapter.NotesAdapterInteraction {
-
+    DatabaseReference myRef;
     private PersonsAdapter mPersonsAdapter;
 
     static final String ARGUMENT_ID = "arg_id";
     static final String TAG = "UserFragment";
-    View mRootView;
+   View mRootView;
     int pageNumber;
 
     @Override
@@ -45,8 +45,17 @@ public class UsersFragment extends Fragment
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_users, container, false);
-        mRootView = rootView;
+       mRootView = rootView;
       getNoteList();
+        rootView.findViewById(R.id.btn_send).setOnClickListener(new View.OnClickListener() {
+                                                                    @Override
+                                                                    public void onClick(View v) {
+                                                                        if (mPersonsAdapter==null) return;
+                                                                        Log.d(TAG,String.valueOf(mPersonsAdapter.selected.size()));
+                                                                    }
+                                                                }
+
+        );
         return rootView;
     }
 
@@ -76,10 +85,12 @@ public class UsersFragment extends Fragment
     @Override
     public void onDestroy() {
        // AppDatabase.destroyInstance();
+       //  myRef.removeEventListener(); //TODO may be leak;
         super.onDestroy();
     }
 
     private void setRecyclerView(View rootView, List<Person> list) {
+        if(rootView==null) return;
         RecyclerView recyclerView = rootView.findViewById(R.id.recyclerView);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
@@ -96,9 +107,9 @@ public class UsersFragment extends Fragment
         ArrayList list=new ArrayList<Person>();
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("names");
-// Read from the database
-        myRef.addValueEventListener(new ValueEventListener() {
+         myRef = database.getReference("names");
+// Read from the databasef
+          myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 // This method is called once with the initial value and again (c)kerik1303@gmail.com
@@ -107,11 +118,11 @@ public class UsersFragment extends Fragment
 
                 Log.e("Count " ,""+snapshot.getChildrenCount());
                 for (DataSnapshot postSnapshot: snapshot.getChildren()) {
-                    String value = postSnapshot.getValue(Person.class).getName();
-                    String key = postSnapshot.getKey();
-                    Person p =new Person();
-                    p.setName(key);
-                    p.setToken(value);
+                    //String key = postSnapshot.getKey();
+                   // Person p =new Person();
+                    Person p = postSnapshot.getValue(Person.class);
+//                    p.setName(key);
+//                    p.setToken(value);
                     list.add(p);
                 }
                 setRecyclerView(mRootView,list);
