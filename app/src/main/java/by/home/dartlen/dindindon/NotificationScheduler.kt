@@ -83,7 +83,7 @@ class NotificationScheduler {
 
         val pendingIntent = stackBuilder.getPendingIntent(DAILY_REMINDER_REQUEST_CODE, PendingIntent.FLAG_UPDATE_CURRENT)
 
-        val builder = NotificationCompat.Builder(context,"news")
+        val builder = NotificationCompat.Builder(context, "news")
 
         val notification = builder.setContentTitle(title)
                 .setContentText(content)

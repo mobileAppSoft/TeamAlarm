@@ -1,15 +1,19 @@
 package by.home.dartlen.dindindon.data
 
+import android.util.Log
 import androidx.work.Data
+import androidx.work.OneTimeWorkRequest
+import androidx.work.WorkManager
+import by.home.dartlen.dindindon.list.Person
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import androidx.work.WorkManager
-import androidx.work.OneTimeWorkRequest
+import android.accounts.AccountManager
 import by.home.dartlen.dindindon.Constants.TIME_ALARM
-import by.home.dartlen.dindindon.SetAlarmWorker
+import by.home.dartlen.dindindon.worker.SetAlarmWorker
+import java.util.*
 
-
-class MyFireBaseMessagingService: FirebaseMessagingService(){
+class MyFireBaseMessagingService : FirebaseMessagingService() {
     override fun onMessageReceived(remoteMessage: RemoteMessage?) {
         super.onMessageReceived(remoteMessage)
 
@@ -38,7 +42,7 @@ class MyFireBaseMessagingService: FirebaseMessagingService(){
         // message, here is where that should be initiated. See sendNotification method below.
     }
 
-    fun createInputData(time:Long): Data {
+    fun createInputData(time: Long): Data {
         return Data.Builder()
                 .putLong(TIME_ALARM, time)
                 .build()
@@ -52,6 +56,24 @@ class MyFireBaseMessagingService: FirebaseMessagingService(){
         // Instance ID token to your app server.
         //ediNUlBd8Ls:APA91bH2s6p98weNGSlhXMeMAYu2RM4D7Ro5mWotj0vdJxPaPn2YVNmSLnwDdfTdhJpI5K0Doc7iQdNallCMVkhLtHkHoPMg6mvgWX9tNvF0sRDFEr166XexvqmKFbEdrYaNGiMVPZrb
         sendRegistrationToServer(token)
+
+        val database = FirebaseDatabase.getInstance()
+        val myRef = database.getReference("names")
+
+        val accounts = AccountManager.get(this).accounts
+
+        var name = "Vasia ${Date().time}"
+        if (accounts.isNotEmpty()) {
+            name = accounts[0].name
+        }
+
+        myRef.push().setValue(Person(name, token))
+            .addOnSuccessListener {
+                Log.d("TOKEN","writed")
+            }.addOnFailureListener {
+                        Log.d("TOKEN","NOT writed")
+                    }
+
     }
 
     private fun sendRegistrationToServer(token: String?) {
