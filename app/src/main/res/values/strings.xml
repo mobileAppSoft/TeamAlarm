@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">TeamAlarm</string>
     <string name="start">Start</string>
     <string name="stop">Stop</string>
     <string name="titleTimePicker">Set New Alarm:</string>
