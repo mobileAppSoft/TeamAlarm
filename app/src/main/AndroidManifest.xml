@@ -21,7 +21,6 @@
         <activity android:name=".AlarmActivity">
 
         </activity>
-
         <receiver android:name=".AlarmReciver" />
         <service
             android:name=".data.MyFireBaseMessagingService">
@@ -30,5 +29,5 @@
             </intent-filter>
         </service>
     </application>
-
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
