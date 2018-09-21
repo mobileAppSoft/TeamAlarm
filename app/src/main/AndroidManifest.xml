@@ -19,8 +19,7 @@
         <activity android:name=".AlarmActivity">
 
         </activity>
-
         <receiver android:name=".AlarmReciver" />
     </application>
-
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

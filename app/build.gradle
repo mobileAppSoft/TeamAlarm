@@ -4,6 +4,7 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -52,4 +53,10 @@ dependencies {
     testImplementation "android.arch.core:core-testing:$lifecycle_version"
 
     implementation 'androidx.recyclerview:recyclerview:1.0.0-rc02'
+
+    implementation 'com.google.firebase:firebase-core:16.0.1'
+    implementation 'com.google.firebase:firebase-messaging:17.1.0'
+    compile 'com.squareup.okhttp3:okhttp:3.4.1'
 }
+
+apply plugin: 'com.google.gms.google-services'
