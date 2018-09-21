@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import by.home.dartlen.dindindon.list.UsersFragment
 import org.json.JSONArray
-import java.sql.Timestamp
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,8 +16,8 @@ class MainActivity : AppCompatActivity() {
 
         var fcm = FCMSender()
 
-        var users = JSONArray().put(arrayListOf("cATC45HaBDE:APA91bEucpTh1fc3AXLWE9he9HXGdWTKx1kgfD_eb1LB__ytY24rjxgE4cbGVsLilBX6Yx1"))
-        var time = Timestamp(100002)
+        var users = JSONArray().put("d6mDN9o4sEw:APA91bGsPni9cCLObvFTYKSdQ-8fZAXuxCfy3sJCMvZYmAg1urb_KjhEC5w2GHznl-JiIv52pRFKgd4JzgMucJEanVQX-OerY_J4yDfoqSKb6WV2SFk-A5k9esCOXalGfImwApHubdZX")
+        var time = "1537567791000"
         fcm.FcmSend(users, "Title", "Message", time)
     }
 }

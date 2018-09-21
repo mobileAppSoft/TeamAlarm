@@ -15,7 +15,6 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import by.home.dartlen.dindindon.AlarmActivity
 import by.home.dartlen.dindindon.AlarmReciver
-import by.home.dartlen.dindindon.FCMSender
 import by.home.dartlen.dindindon.R
 import by.home.dartlen.dindindon.timepicker.time.TimePickerDialog
 import kotlinx.android.synthetic.main.fragment_main.*

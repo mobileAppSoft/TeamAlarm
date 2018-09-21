@@ -1,31 +1,28 @@
 package by.home.dartlen.dindindon
 
 import android.util.Log
-import org.json.JSONArray
-import org.json.JSONException
-import org.json.JSONObject
-
-import java.io.IOException
-import java.sql.Timestamp
-
 import okhttp3.MediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
-
 import okhttp3.RequestBody
+import org.json.JSONArray
+import org.json.JSONException
+import org.json.JSONObject
+import java.io.IOException
 
 class FCMSender {
 
-    private val API_KEY = "AIzaSyCIcKRqkSayygRxKyLH9NYBB_bTS8_Hukk"
+    private val API_KEY = "AIzaSyBvGa1K0GvjrA2OBjXKcWgzNB_kPgOP4Js"
     val FCM_MESSAGE_URL = "https://fcm.googleapis.com/fcm/send"
-    public fun FcmSend(recipients: JSONArray, title: String,  message: String, alarmTIme: Timestamp) {
+    public fun FcmSend(recipients: JSONArray, title: String, message: String, alarmTIme: String) {
         Thread(Runnable {
             try {
                 val root = JSONObject()
                 val notification = JSONObject()
                 try {
-                    root.put("registration_ids", recipients)
 
+                    root.put("registration_ids", recipients)
+                    root.put("from", "611076596330")
                     notification.put("title", title)
                     notification.put("time", alarmTIme)  //new SimpleDateFormat("EEE(MMM dd)HH:mm:ss").format(new Date()));
 

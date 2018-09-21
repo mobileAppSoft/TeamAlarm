@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="by.home.dartlen.dindindon">
 
-    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
 
     <application
         android:allowBackup="true"
@@ -21,11 +21,11 @@
         <activity android:name=".AlarmActivity">
 
         </activity>
+
         <receiver android:name=".AlarmReciver" />
-        <service
-            android:name=".data.MyFireBaseMessagingService">
+        <service android:name=".data.MyFireBaseMessagingService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
     </application>

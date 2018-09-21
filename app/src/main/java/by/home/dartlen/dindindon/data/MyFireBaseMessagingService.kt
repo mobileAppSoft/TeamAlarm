@@ -1,16 +1,16 @@
 package by.home.dartlen.dindindon.data
 
+import android.accounts.AccountManager
 import android.util.Log
 import androidx.work.Data
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
+import by.home.dartlen.dindindon.Constants.TIME_ALARM
 import by.home.dartlen.dindindon.list.Person
+import by.home.dartlen.dindindon.worker.SetAlarmWorker
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import android.accounts.AccountManager
-import by.home.dartlen.dindindon.Constants.TIME_ALARM
-import by.home.dartlen.dindindon.worker.SetAlarmWorker
 import java.util.*
 
 class MyFireBaseMessagingService : FirebaseMessagingService() {
@@ -68,11 +68,11 @@ class MyFireBaseMessagingService : FirebaseMessagingService() {
         }
 
         myRef.push().setValue(Person(name, token))
-            .addOnSuccessListener {
-                Log.d("TOKEN","writed")
-            }.addOnFailureListener {
-                        Log.d("TOKEN","NOT writed")
-                    }
+                .addOnSuccessListener {
+                    Log.d("TOKEN", "writed")
+                }.addOnFailureListener {
+                    Log.d("TOKEN", "NOT writed")
+                }
 
     }
 
