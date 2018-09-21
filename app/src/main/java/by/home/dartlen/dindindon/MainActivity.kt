@@ -12,7 +12,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         var fcm = FCMSender()
-        var users = JSONArray()
+
+        var users = JSONArray().put(arrayListOf("cATC45HaBDE:APA91bEucpTh1fc3AXLWE9he9HXGdWTKx1kgfD_eb1LB__ytY24rjxgE4cbGVsLilBX6Yx1"))
         var time = Timestamp(100002)
         fcm.FcmSend(users, "Title", "Message", time)
     }

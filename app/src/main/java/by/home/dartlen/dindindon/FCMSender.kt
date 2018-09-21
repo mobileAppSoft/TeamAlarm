@@ -1,7 +1,6 @@
 package by.home.dartlen.dindindon
 
 import android.util.Log
-
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -12,13 +11,13 @@ import java.sql.Timestamp
 import okhttp3.MediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
+
 import okhttp3.RequestBody
-import okhttp3.Response
 
 class FCMSender {
 
-    private val API_KEY = "AIzaSyCcuJt3fvpRvO-wBvKnnrvLi7nShXWTL5c"
-
+    private val API_KEY = "AIzaSyCIcKRqkSayygRxKyLH9NYBB_bTS8_Hukk"
+    val FCM_MESSAGE_URL = "https://fcm.googleapis.com/fcm/send"
     public fun FcmSend(recipients: JSONArray, title: String,  message: String, alarmTIme: Timestamp) {
         Thread(Runnable {
             try {
@@ -38,7 +37,7 @@ class FCMSender {
                 }
 
                 val client = OkHttpClient()
-                val FCM_MESSAGE_URL = "https://fcm.googleapis.com/fcm/send"
+
                 val JSON = MediaType.parse("application/json; charset=utf-8")
 
                 val body = RequestBody.create(JSON, root.toString())
@@ -50,7 +49,7 @@ class FCMSender {
                 val response = client.newCall(request).execute()
 
                 val result = response.body().string()
-                Log.d("tag", result);
+                Log.d("tag", result)
             } catch (e: IOException) {
                 println("Unable to send GCM message.")
                 println("Please ensure that API key, and that the device's registration token is correct (if specified).")
