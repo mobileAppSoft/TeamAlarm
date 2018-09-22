@@ -44,4 +44,5 @@ class NewAlarmActivity : AppCompatActivity(), TimePickerDialog.OnMinuteSelectedL
         supportFragmentManager.beginTransaction().add(dialog, "dialog").commit()
     }
 
+
 }

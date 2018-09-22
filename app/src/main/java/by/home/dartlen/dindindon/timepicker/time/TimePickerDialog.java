@@ -741,6 +741,8 @@ public class TimePickerDialog extends AppCompatDialogFragment implements
             mThemeDark = Utils.isDarkTheme(getActivity(), mThemeDark);
         }
 
+
+
         Resources res = getResources();
         Context context = getActivity();
         mHourPickerDescription = "";
@@ -1114,8 +1116,17 @@ public class TimePickerDialog extends AppCompatDialogFragment implements
     @Override
     public void onDismiss(DialogInterface dialog) {
         super.onDismiss(dialog);
+
         if (mOnDismissListener != null) mOnDismissListener.onDismiss(dialog);
+        getActivity().finish();
     }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+    }
+
+
 
     @Override
     public void tryVibrate() {
