@@ -38,9 +38,14 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
+
 import java.text.DateFormatSymbols;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -52,9 +57,13 @@ import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.constraintlayout.widget.Constraints;
 import androidx.core.content.ContextCompat;
+import by.home.dartlen.dindindon.MyDatabaseUtil;
 import by.home.dartlen.dindindon.R;
+import by.home.dartlen.dindindon.list.Person;
 import by.home.dartlen.dindindon.timepicker.HapticFeedbackController;
 import by.home.dartlen.dindindon.timepicker.Utils;
+
+import static java.lang.StrictMath.toIntExact;
 
 /**
  * Dialog to set a time.
@@ -112,6 +121,7 @@ public class TimePickerDialog extends AppCompatDialogFragment implements
     private TextView mAmTextView;
     private TextView mPmTextView;
     private TextView alarmCountTextView;
+    private TextView inTimeTextView;
     private View mAmPmLayout;
     private RadialPickerLayout mTimePicker;
     private int mSelectedColor;
@@ -742,7 +752,27 @@ public class TimePickerDialog extends AppCompatDialogFragment implements
         if (!mThemeDarkChanged) {
             mThemeDark = Utils.isDarkTheme(getActivity(), mThemeDark);
         }
+        MyDatabaseUtil.mDatabase
+                .getReference("user_alarms/"
+                        + by.home.dartlen.dindindon.pendingalarms.util.Installation.id(view.getContext())
+                        + "/alarms/").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
 
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    alarmCounter = toIntExact(snapshot.getChildrenCount());
+                    if (alarmCounter != 0) {
+                        alarmCountTextView.setText("" + alarmCounter);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read kerik1303@gmail.com value
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
 
         Resources res = getResources();
         Context context = getActivity();
@@ -769,9 +799,7 @@ public class TimePickerDialog extends AppCompatDialogFragment implements
         mPmTextView = view.findViewById(R.id.mdtp_pm_label);
         mPmTextView.setOnKeyListener(keyboardListener);
         alarmCountTextView = view.findViewById(R.id.alarmCount);
-        if (alarmCounter != 0) {
-            alarmCountTextView.setText("" + alarmCounter);
-        }
+
         mAmPmLayout = view.findViewById(R.id.mdtp_ampm_layout);
         String[] amPmTexts = new DateFormatSymbols(mLocale).getAmPmStrings();
         mAmText = amPmTexts[0];
@@ -1078,6 +1106,8 @@ public class TimePickerDialog extends AppCompatDialogFragment implements
         int darkBackgroundColor = ContextCompat.getColor(context, R.color.mdtp_light_gray);
         int lightGray = ContextCompat.getColor(context, R.color.mdtp_light_gray);
 
+
+
         mTimePicker.setBackgroundColor(mThemeDark ? lightGray : circleBackground);
         view.findViewById(R.id.mdtp_time_picker_dialog).setBackgroundColor(mThemeDark ? darkBackgroundColor : backgroundColor);
         return view;
@@ -1207,6 +1237,13 @@ public class TimePickerDialog extends AppCompatDialogFragment implements
         setSecond(newValue.getSecond());
         mTimePicker.setContentDescription(mSecondPickerDescription + ": " + newValue.getSecond());
         if (!mIs24HourMode) updateAmPmDisplay(newValue.isAM() ? AM : PM);
+
+        Calendar cal = GregorianCalendar.getInstance();
+        int currentSeconds = cal.get(Calendar.HOUR_OF_DAY) * 3600 + cal.get(Calendar.MINUTE) * 60 ;
+        int secondsLeft = newValue.toSeconds() - currentSeconds;
+        int hourLeft = secondsLeft / 3600;
+        int minutesLeft = (secondsLeft - hourLeft * 3600) / 60 ;
+        inTimeTextView.setText("Time left: " +  hourLeft + " hours, " + minutesLeft + " minutes");
     }
 
     @Override

@@ -90,8 +90,8 @@ class NewAlarmActivity : AppCompatActivity(), TimePickerDialog.OnMinuteSelectedL
     }
 
     fun saveAlarms(timeStamp: Long) {
-//         FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-        val database = FirebaseDatabase.getInstance()
+        val database = MyDatabaseUtil.mDatabase
+
         // database.setPersistenceEnabled(true);
         val myRef = database.getReference("user_alarms/" + by.home.dartlen.dindindon.pendingalarms.util.Installation.id(this) + "/alarms/")
         myRef.push().setValue(timeStamp )

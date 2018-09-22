@@ -6,6 +6,7 @@ import androidx.work.Data
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
 import by.home.dartlen.dindindon.Constants.TIME_ALARM
+import by.home.dartlen.dindindon.MyDatabaseUtil
 import by.home.dartlen.dindindon.list.Person
 import by.home.dartlen.dindindon.worker.SetAlarmWorker
 import com.google.firebase.database.FirebaseDatabase
@@ -34,7 +35,7 @@ class MyFireBaseMessagingService : FirebaseMessagingService() {
         }
 
         // Check if message contains a notification payload.
-        if (remoteMessage!!.notification != null) {
+        if (remoteMessage.notification != null) {
             //Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
         }
 
@@ -57,7 +58,7 @@ class MyFireBaseMessagingService : FirebaseMessagingService() {
         //ediNUlBd8Ls:APA91bH2s6p98weNGSlhXMeMAYu2RM4D7Ro5mWotj0vdJxPaPn2YVNmSLnwDdfTdhJpI5K0Doc7iQdNallCMVkhLtHkHoPMg6mvgWX9tNvF0sRDFEr166XexvqmKFbEdrYaNGiMVPZrb
         sendRegistrationToServer(token)
 
-        val database = FirebaseDatabase.getInstance()
+        val database = MyDatabaseUtil.mDatabase
         val myRef = database.getReference("names")
 
         val accounts = AccountManager.get(this).accounts

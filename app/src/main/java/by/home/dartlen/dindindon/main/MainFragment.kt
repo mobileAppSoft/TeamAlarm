@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import by.home.dartlen.dindindon.AlarmActivity
 import by.home.dartlen.dindindon.AlarmReciver
+import by.home.dartlen.dindindon.MyDatabaseUtil
 import by.home.dartlen.dindindon.R
 import by.home.dartlen.dindindon.timepicker.time.TimePickerDialog
 import com.google.firebase.database.FirebaseDatabase
@@ -97,7 +98,7 @@ class MainFragment : Fragment(), TimePickerDialog.OnTimeSetListener,
 
     fun saveAlarms(timeStamp: Long) {
 //         FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-        val database = FirebaseDatabase.getInstance()
+        val database = MyDatabaseUtil.mDatabase
         // database.setPersistenceEnabled(true);
         val myRef = database.getReference("user_alarms/" + by.home.dartlen.dindindon.pendingalarms.util.Installation.id(activity!!.applicationContext) + "/alarms/")
         myRef.push().setValue(timeStamp / 1000)
