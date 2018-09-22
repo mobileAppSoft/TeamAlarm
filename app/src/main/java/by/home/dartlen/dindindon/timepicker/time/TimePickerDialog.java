@@ -45,6 +45,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.DateFormatSymbols;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -120,6 +121,7 @@ public class TimePickerDialog extends AppCompatDialogFragment implements
     private TextView mAmTextView;
     private TextView mPmTextView;
     private TextView alarmCountTextView;
+    private TextView inTimeTextView;
     private View mAmPmLayout;
     private RadialPickerLayout mTimePicker;
     private int mSelectedColor;
@@ -1235,6 +1237,13 @@ public class TimePickerDialog extends AppCompatDialogFragment implements
         setSecond(newValue.getSecond());
         mTimePicker.setContentDescription(mSecondPickerDescription + ": " + newValue.getSecond());
         if (!mIs24HourMode) updateAmPmDisplay(newValue.isAM() ? AM : PM);
+
+        Calendar cal = GregorianCalendar.getInstance();
+        int currentSeconds = cal.get(Calendar.HOUR_OF_DAY) * 3600 + cal.get(Calendar.MINUTE) * 60 ;
+        int secondsLeft = newValue.toSeconds() - currentSeconds;
+        int hourLeft = secondsLeft / 3600;
+        int minutesLeft = (secondsLeft - hourLeft * 3600) / 60 ;
+        inTimeTextView.setText("Time left: " +  hourLeft + " hours, " + minutesLeft + " minutes");
     }
 
     @Override
