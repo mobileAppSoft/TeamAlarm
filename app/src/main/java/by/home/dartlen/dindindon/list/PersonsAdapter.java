@@ -5,7 +5,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,20 +35,21 @@ public class PersonsAdapter extends RecyclerView.Adapter<PersonsAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(PersonsAdapter.ViewHolder holder, int position) {
-      // String callData = new SimpleDateFormat("EEE(MMM dd)HH:mm:ss").format(new Date());
-      //  holder.tvTime.setText(DateFormat.format("dd-MM-yyyy/HH:mm",(long)  * 1000).toString());
+        // String callData = new SimpleDateFormat("EEE(MMM dd)HH:mm:ss").format(new Date());
+        //  holder.tvTime.setText(DateFormat.format("dd-MM-yyyy/HH:mm",(long)  * 1000).toString());
         holder.tvName.setText(mPersonList.get(position).getName());
-      //  holder.tvLat.setText(String.valueOf(mPersonList.get(position).getLatitude()));
-       // holder.tvLong.setText(String.valueOf(mPersonList.get(position).getLongitude()));
+        //  holder.tvLat.setText(String.valueOf(mPersonList.get(position).getLatitude()));
+        // holder.tvLong.setText(String.valueOf(mPersonList.get(position).getLongitude()));
 
         holder.mView.setOnClickListener(this);
         holder.mView.setTag(position);
 
         ///---------------
-        if (selected.contains(mPersonList.get(position))){
-            highlightView(holder.mView);}
-        else{
-            unhighlightView(holder.mView);}
+        if (selected.contains(mPersonList.get(position))) {
+            highlightView(holder.mView);
+        } else {
+            unhighlightView(holder.mView);
+        }
         //-------------
     }
 
@@ -66,17 +66,17 @@ public class PersonsAdapter extends RecyclerView.Adapter<PersonsAdapter.ViewHold
         }
         mListener.onClickItem(person);
         //Опции
-       // notifyItemRemoved(position);
-       // notifyItemRangeChanged(position, mPersonList.size());
+        // notifyItemRemoved(position);
+        // notifyItemRangeChanged(position, mPersonList.size());
     }
 
 
     private void highlightView(View view) {
-        view.setBackgroundColor(ContextCompat.getColor(((Fragment)mListener).getContext(), R.color.colorAccent));
+        view.setBackgroundColor(ContextCompat.getColor(((Fragment) mListener).getContext(), R.color.colorAccent));
     }
 
     private void unhighlightView(View view) {
-        view.setBackgroundColor(ContextCompat.getColor(((Fragment)mListener).getContext(), android.R.color.background_light));
+        view.setBackgroundColor(ContextCompat.getColor(((Fragment) mListener).getContext(), android.R.color.background_light));
     }
 
     public void updateList(List<Person> updatedList) {

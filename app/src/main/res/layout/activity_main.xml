@@ -7,7 +7,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="0dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -18,7 +18,7 @@
             android:id="@+id/nav_fragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="match_parent"
             app:defaultNavHost="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -27,13 +27,5 @@
             app:navGraph="@navigation/mobile_navigation"
             tools:layout="@layout/fragment_main" />
     </LinearLayout>
-    <FrameLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:id="@+id/container">
-        <!-- my content was located here (some textviews, buttons and so on). -->
-    </FrameLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

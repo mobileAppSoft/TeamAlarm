@@ -51,6 +51,7 @@ class MainFragment : Fragment(), TimePickerDialog.OnTimeSetListener,
         }
 
         alarm.setOnClickListener {
+
             dialog = TimePickerDialog.newInstance(this, this,
                     this, this, this, this, true)
             dialog.show(activity!!.supportFragmentManager, "TAG")
