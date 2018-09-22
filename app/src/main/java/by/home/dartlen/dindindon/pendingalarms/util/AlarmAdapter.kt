@@ -30,7 +30,7 @@ class AlarmAdapter(private val listener: (Alarm) -> Unit) : RecyclerView.Adapter
             /*itemView.geo.text = item.lng.toString() + "," + item.lon.toString()
             itemView.city.text = item.city
             itemView.date.text = DateUtils.formatDateTime(itemView.context, DateTime(item.createdAt), DateUtils.FORMAT_SHOW_DATE or DateUtils.FORMAT_SHOW_TIME)*/
-            itemView.tv_alarm.text = DateFormat.format("dd-MM-yyyy/HH:mm", (item.time * 1000)).toString()
+            itemView.tv_alarm.text = DateFormat.format("HH:mm", (item.time)).toString()
             itemView.setOnClickListener {
                 listener(item)
             }
