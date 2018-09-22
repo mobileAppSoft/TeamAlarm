@@ -758,12 +758,11 @@ public class TimePickerDialog extends AppCompatDialogFragment implements
                         + "/alarms/").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
+                String counter = snapshot.getChildrenCount()+"";
 
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    alarmCounter = toIntExact(snapshot.getChildrenCount());
-                    if (alarmCounter != 0) {
-                        alarmCountTextView.setText("" + alarmCounter);
-                    }
+                alarmCounter = Integer.parseInt(counter);
+                if (alarmCounter != 0) {
+                    alarmCountTextView.setText("" + alarmCounter);
                 }
             }
 
