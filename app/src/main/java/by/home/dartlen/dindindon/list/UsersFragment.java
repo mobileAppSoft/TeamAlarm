@@ -65,6 +65,7 @@ public class UsersFragment extends Fragment
                             PREFS_FILENAME, Context.MODE_PRIVATE);
 
                     fcm.FcmSend(x, "alarm", "alarm", sharedPref.getLong(TIME_ALARM, 1L) + "");
+                    getActivity().finish();
 
                 }
         );
