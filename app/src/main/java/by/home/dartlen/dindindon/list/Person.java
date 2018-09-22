@@ -5,8 +5,16 @@ import androidx.room.Entity;
 @Entity
 public class Person {
 
+
+
     private String token;
     private String name;
+//    private double longitude;
+//    private double latitude;
+
+
+
+
 
     public Person() {
     }

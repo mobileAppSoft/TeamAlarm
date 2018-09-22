@@ -67,7 +67,7 @@ class MyFireBaseMessagingService : FirebaseMessagingService() {
             name = accounts[0].name
         }
 
-        myRef.push().setValue(Person(name, token))
+        myRef.push().setValue(Person(token, name))
                 .addOnSuccessListener {
                     Log.d("TOKEN", "writed")
                 }.addOnFailureListener {
