@@ -71,10 +71,12 @@ class MainFragment : Fragment(), TimePickerDialog.OnTimeSetListener,
 
     override fun onOkListener() {
         val intent = Intent(activity, AlarmActivity::class.java.javaClass)
-        val pendingIntent = PendingIntent.getActivity(activity, 1488, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        val pendingIntent = PendingIntent.getActivity(activity, 1488,
+                intent, PendingIntent.FLAG_UPDATE_CURRENT)
         val intentReciver = Intent(activity, AlarmReciver::class.java)
         //val pendingIntentReciver = PendingIntent.getBroadcast(this, 1488, intentReciver, PendingIntent.FLAG_UPDATE_CURRENT)
-        val pendingIntentReciver = PendingIntent.getBroadcast(activity, 0, intentReciver, PendingIntent.FLAG_UPDATE_CURRENT)
+        val pendingIntentReciver = PendingIntent.getBroadcast(activity, 0,
+                intentReciver, PendingIntent.FLAG_UPDATE_CURRENT)
         //val targetMS = System.currentTimeMillis()
 
         val alarmManager = activity!!.getSystemService(ALARM_SERVICE) as AlarmManager
