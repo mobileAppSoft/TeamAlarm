@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import by.home.dartlen.dindindon.MyDatabaseUtil
 import by.home.dartlen.dindindon.R
 import by.home.dartlen.dindindon.pendingalarms.util.Alarm
 import by.home.dartlen.dindindon.pendingalarms.util.AlarmAdapter
@@ -45,7 +46,7 @@ class PendingAlarmsFragmentJava : Fragment() {
     private fun getNoteList() {
         val list = ArrayList<Alarm>()
         // Write a message to the database
-        val database = FirebaseDatabase.getInstance()
+        val database = MyDatabaseUtil.mDatabase
         myRef = database.getReference("user_alarms/" + by.home.dartlen.dindindon.pendingalarms.util.Installation.id(context) + "/alarms")
 
         // Read from the databasef

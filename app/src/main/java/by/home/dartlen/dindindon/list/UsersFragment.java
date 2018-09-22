@@ -23,6 +23,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import by.home.dartlen.dindindon.FCMSender;
+import by.home.dartlen.dindindon.MyDatabaseUtil;
 import by.home.dartlen.dindindon.R;
 
 import static by.home.dartlen.dindindon.Constants.PREFS_FILENAME;
@@ -108,7 +109,7 @@ public class UsersFragment extends Fragment
     private void getNoteList() {
         ArrayList list = new ArrayList<Person>();
         // Write a message to the database
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        FirebaseDatabase database = MyDatabaseUtil.mDatabase;
         myRef = database.getReference("names");
 // Read from the databasef
         myRef.addValueEventListener(new ValueEventListener() {
