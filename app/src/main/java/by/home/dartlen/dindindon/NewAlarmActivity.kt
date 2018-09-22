@@ -5,18 +5,17 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
+import android.util.Log
 import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.AlarmManagerCompat
-import androidx.navigation.Navigation
+import androidx.navigation.NavController
 import by.home.dartlen.dindindon.Constants.PREFS_FILENAME
 import by.home.dartlen.dindindon.Constants.TIME_ALARM
+import by.home.dartlen.dindindon.pendingalarms.PendingAcivity
 import by.home.dartlen.dindindon.timepicker.time.TimePickerDialog
+import com.google.firebase.database.FirebaseDatabase
 import java.util.*
-import android.view.ViewGroup
-import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment.findNavController
 
 
 class NewAlarmActivity : AppCompatActivity(), TimePickerDialog.OnMinuteSelectedListener, TimePickerDialog.OnClickedPendingAlarms, TimePickerDialog.OnTimeSetListener, TimePickerDialog.OnHourSelectedListener, TimePickerDialog.OnClickedShareAlarm, TimePickerDialog.OnOkListener {
@@ -24,9 +23,9 @@ class NewAlarmActivity : AppCompatActivity(), TimePickerDialog.OnMinuteSelectedL
     lateinit var dialog: TimePickerDialog
     var mHour: Int = 0
     var mMinute: Int = 0
-    lateinit var navController:NavController
 
     override fun onOkListener() {
+
         val intent = Intent(this, AlarmActivity::class.java.javaClass)
         val pendingIntent = PendingIntent.getActivity(this, 1488,
                 intent, PendingIntent.FLAG_UPDATE_CURRENT)
@@ -39,6 +38,8 @@ class NewAlarmActivity : AppCompatActivity(), TimePickerDialog.OnMinuteSelectedL
         c.set(Calendar.MINUTE, mMinute)
         c.set(Calendar.SECOND, 0)
         AlarmManagerCompat.setAlarmClock(alarmManager, c.timeInMillis, pendingIntent, pendingIntentReciver)
+
+        saveAlarms(c.timeInMillis)
         dialog.dismiss()
     }
 
@@ -55,6 +56,8 @@ class NewAlarmActivity : AppCompatActivity(), TimePickerDialog.OnMinuteSelectedL
         editor.apply()
 
 
+
+
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
@@ -68,8 +71,8 @@ class NewAlarmActivity : AppCompatActivity(), TimePickerDialog.OnMinuteSelectedL
     }
 
     override fun onPendingAlarms() {
-
-        navController.navigate(R.id.pendingAlarms, null)
+        val intent = Intent(this, PendingAcivity::class.java)
+        startActivity(intent)
     }
 
     override fun onMinuteSelected(minute: Int) {
@@ -84,6 +87,20 @@ class NewAlarmActivity : AppCompatActivity(), TimePickerDialog.OnMinuteSelectedL
         dialog = TimePickerDialog.newInstance(this, this,
                 this, this, this, this, true)
         supportFragmentManager.beginTransaction().add(dialog, "dialog").commit()
+    }
+
+    fun saveAlarms(timeStamp: Long) {
+//         FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        val database = FirebaseDatabase.getInstance()
+        // database.setPersistenceEnabled(true);
+        val myRef = database.getReference("user_alarms/" + by.home.dartlen.dindindon.pendingalarms.util.Installation.id(this) + "/alarms/")
+        myRef.push().setValue(timeStamp )
+                .addOnSuccessListener {
+                    Log.d("alarm", "writed")
+                }.addOnFailureListener {
+                    Log.d("alarm", "NOT writed")
+                }
+
     }
 
 

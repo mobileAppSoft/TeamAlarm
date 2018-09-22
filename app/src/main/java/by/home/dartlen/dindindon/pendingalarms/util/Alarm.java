@@ -5,6 +5,9 @@ import androidx.room.Entity;
 @Entity
 public class Alarm {
 
+    public Alarm(long time) {
+        this.time = time;
+    }
 
     private long time;
 

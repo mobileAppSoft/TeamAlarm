@@ -38,8 +38,6 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import org.w3c.dom.Node;
-
 import java.text.DateFormatSymbols;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -93,6 +91,7 @@ public class TimePickerDialog extends AppCompatDialogFragment implements
     private static final String KEY_LOCALE = "locale";
     // Delay before starting the pulse animation, in ms.
     private static final int PULSE_ANIMATOR_DELAY = 300;
+    private static int alarmCounter = 0;
     private OnTimeSetListener mCallback;
     private OnHourSelectedListener mHourCallback;
     private OnMinuteSelectedListener mMinuteCallback;
@@ -113,7 +112,6 @@ public class TimePickerDialog extends AppCompatDialogFragment implements
     private TextView mAmTextView;
     private TextView mPmTextView;
     private TextView alarmCountTextView;
-    private static int alarmCounter = 0;
     private View mAmPmLayout;
     private RadialPickerLayout mTimePicker;
     private int mSelectedColor;

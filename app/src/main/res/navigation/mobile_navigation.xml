@@ -21,5 +21,9 @@
     <fragment
         android:id="@+id/userSelect"
         android:name="by.home.dartlen.dindindon.list.UsersFragment"
-        android:label="Select user"></fragment>
+        android:label="Select user">
+
+    </fragment>
+
+
 </navigation>

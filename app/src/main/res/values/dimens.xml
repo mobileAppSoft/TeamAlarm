@@ -24,4 +24,5 @@
     <item name="mdtp_circle_radius_multiplier_24HourMode" format="float" translatable="false" type="string">
         0.85
     </item>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

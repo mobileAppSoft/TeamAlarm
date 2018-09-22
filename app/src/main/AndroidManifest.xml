@@ -11,10 +11,8 @@
         android:label="TeamAlarm"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
-
-        </activity>
-        <activity android:name=".AlarmActivity"></activity>
+        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".AlarmActivity" />
 
         <receiver android:name=".AlarmReciver" />
 
@@ -34,6 +32,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".pendingalarms.PendingAcivity"
+            android:label="@string/title_activity_pending_acivity"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
