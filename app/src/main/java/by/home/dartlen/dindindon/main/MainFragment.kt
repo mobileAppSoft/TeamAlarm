@@ -3,6 +3,7 @@ package by.home.dartlen.dindindon.main
 import android.accounts.AccountManager
 import android.app.AlarmManager
 import android.app.PendingIntent
+import android.content.Context
 import android.content.Context.ALARM_SERVICE
 import android.content.Intent
 import android.os.Build
@@ -98,8 +99,8 @@ class MainFragment : Fragment(), TimePickerDialog.OnTimeSetListener,
 //         FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         val database = FirebaseDatabase.getInstance()
         // database.setPersistenceEnabled(true);
-        val myRef = database.getReference("user_alarms/"+ Build.SERIAL+"/alarms/")
-        myRef.push().setValue(timeStamp)
+        val myRef = database.getReference("user_alarms/"+ by.home.dartlen.dindindon.pendingalarms.util.Installation.id(activity!!.applicationContext)+"/alarms/")
+        myRef.push().setValue(timeStamp/1000)
                 .addOnSuccessListener {
                     Log.d("alarm", "writed")
                 }.addOnFailureListener {

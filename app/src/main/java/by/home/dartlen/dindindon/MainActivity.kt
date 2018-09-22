@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-        val userFrag: Fragment = UsersFragment()
-        getSupportFragmentManager().beginTransaction().add(R.id.container, userFrag).commit();
+       // val userFrag: Fragment = UsersFragment()
+       // getSupportFragmentManager().beginTransaction().add(R.id.container, userFrag).commit();
     }
 }
