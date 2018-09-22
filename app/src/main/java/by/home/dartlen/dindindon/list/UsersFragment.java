@@ -51,7 +51,7 @@ public class UsersFragment extends Fragment
                                                                     @Override
                                                                     public void onClick(View v) {
                                                                         if (mPersonsAdapter==null) return;
-                                                                        Log.d(TAG,String.valueOf(mPersonsAdapter.selected.size()));
+                                                                      //  Log.d(TAG,String.valueOf(mPersonsAdapter.selected.size()));
                                                                     }
                                                                 }
         );

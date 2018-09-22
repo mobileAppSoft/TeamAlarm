@@ -1,9 +1,11 @@
 package by.home.dartlen.dindindon.main
 
+import android.accounts.AccountManager
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context.ALARM_SERVICE
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -17,6 +19,7 @@ import by.home.dartlen.dindindon.AlarmActivity
 import by.home.dartlen.dindindon.AlarmReciver
 import by.home.dartlen.dindindon.R
 import by.home.dartlen.dindindon.timepicker.time.TimePickerDialog
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.fragment_main.*
 import java.util.*
 
@@ -87,9 +90,24 @@ class MainFragment : Fragment(), TimePickerDialog.OnTimeSetListener,
         AlarmManagerCompat.setAlarmClock(alarmManager, c.timeInMillis, pendingIntent, pendingIntentReciver)
         /*AlarmManagerCompat.setExactAndAllowWhileIdle(alarmManager, AlarmManager.RTC_WAKEUP,
                 c.timeInMillis, pendingIntentReciver)*/
-
+        saveAlarms(c.timeInMillis);
         dialog.dismiss()
     }
+
+     fun saveAlarms( timeStamp: Long) {
+//         FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        val database = FirebaseDatabase.getInstance()
+        // database.setPersistenceEnabled(true);
+        val myRef = database.getReference("user_alarms/"+ Build.SERIAL+"/alarms/")
+        myRef.push().setValue(timeStamp)
+                .addOnSuccessListener {
+                    Log.d("alarm", "writed")
+                }.addOnFailureListener {
+                    Log.d("alarm", "NOT writed")
+                }
+
+    }
+
 
     override fun onPendingAlarms() {
         val navController = Navigation.findNavController(view!!)
@@ -98,6 +116,8 @@ class MainFragment : Fragment(), TimePickerDialog.OnTimeSetListener,
     }
 
     override fun shareAlarm() {
-
+      // activity.getSupportFragmentManager().beginTransaction().add(R.id.container, userFrag).commit();
     }
+
+
 }
