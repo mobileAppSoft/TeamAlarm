@@ -799,6 +799,7 @@ public class TimePickerDialog extends AppCompatDialogFragment implements
         mPmTextView = view.findViewById(R.id.mdtp_pm_label);
         mPmTextView.setOnKeyListener(keyboardListener);
         alarmCountTextView = view.findViewById(R.id.alarmCount);
+        inTimeTextView = view.findViewById(R.id.in_time);
 
         mAmPmLayout = view.findViewById(R.id.mdtp_ampm_layout);
         String[] amPmTexts = new DateFormatSymbols(mLocale).getAmPmStrings();
