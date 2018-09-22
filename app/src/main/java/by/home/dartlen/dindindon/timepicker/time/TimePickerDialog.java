@@ -798,7 +798,7 @@ public class TimePickerDialog extends AppCompatDialogFragment implements
         mPmTextView = view.findViewById(R.id.mdtp_pm_label);
         mPmTextView.setOnKeyListener(keyboardListener);
         alarmCountTextView = view.findViewById(R.id.alarmCount);
-        inTimeTextView = view.findViewById(R.id.in_time);
+
 
         mAmPmLayout = view.findViewById(R.id.mdtp_ampm_layout);
         String[] amPmTexts = new DateFormatSymbols(mLocale).getAmPmStrings();
@@ -1106,7 +1106,7 @@ public class TimePickerDialog extends AppCompatDialogFragment implements
         int darkBackgroundColor = ContextCompat.getColor(context, R.color.mdtp_light_gray);
         int lightGray = ContextCompat.getColor(context, R.color.mdtp_light_gray);
 
-
+        inTimeTextView = view.findViewById(R.id.in_time);
 
         mTimePicker.setBackgroundColor(mThemeDark ? lightGray : circleBackground);
         view.findViewById(R.id.mdtp_time_picker_dialog).setBackgroundColor(mThemeDark ? darkBackgroundColor : backgroundColor);
@@ -1243,7 +1243,9 @@ public class TimePickerDialog extends AppCompatDialogFragment implements
         int secondsLeft = newValue.toSeconds() - currentSeconds;
         int hourLeft = secondsLeft / 3600;
         int minutesLeft = (secondsLeft - hourLeft * 3600) / 60 ;
-        inTimeTextView.setText("Time left: " +  hourLeft + " hours, " + minutesLeft + " minutes");
+
+        if(inTimeTextView!=null)
+            inTimeTextView.setText("Time left: " +  hourLeft + " hours, " + minutesLeft + " minutes");
     }
 
     @Override
