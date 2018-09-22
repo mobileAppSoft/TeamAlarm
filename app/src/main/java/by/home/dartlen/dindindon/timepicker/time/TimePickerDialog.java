@@ -38,6 +38,8 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import org.w3c.dom.Node;
+
 import java.text.DateFormatSymbols;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -110,6 +112,8 @@ public class TimePickerDialog extends AppCompatDialogFragment implements
     private TextView mSecondSpaceView;
     private TextView mAmTextView;
     private TextView mPmTextView;
+    private TextView alarmCountTextView;
+    private static int alarmCounter = 0;
     private View mAmPmLayout;
     private RadialPickerLayout mTimePicker;
     private int mSelectedColor;
@@ -767,6 +771,10 @@ public class TimePickerDialog extends AppCompatDialogFragment implements
         mAmTextView.setOnKeyListener(keyboardListener);
         mPmTextView = view.findViewById(R.id.mdtp_pm_label);
         mPmTextView.setOnKeyListener(keyboardListener);
+        alarmCountTextView = view.findViewById(R.id.alarmCount);
+        if (alarmCounter != 0) {
+            alarmCountTextView.setText("" + alarmCounter);
+        }
         mAmPmLayout = view.findViewById(R.id.mdtp_ampm_layout);
         String[] amPmTexts = new DateFormatSymbols(mLocale).getAmPmStrings();
         mAmText = amPmTexts[0];
@@ -862,6 +870,8 @@ public class TimePickerDialog extends AppCompatDialogFragment implements
         }
 
         view.findViewById(R.id.save_button).setOnClickListener(v -> {
+            alarmCounter++;
+            alarmCountTextView.setText("" + alarmCounter);
             mOkCallback.onOkListener();
         });
 

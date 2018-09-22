@@ -48,7 +48,10 @@
             android:id="@+id/in_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="in 8 hours, 35 min" />
+            android:gravity="center"
+            android:text="in 8 hours, 35 min"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
 
         <by.home.dartlen.dindindon.timepicker.time.RadialPickerLayout
             android:id="@+id/mdtp_time_picker"
