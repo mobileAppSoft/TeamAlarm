@@ -9,8 +9,8 @@ import java.io.RandomAccessFile;
 import java.util.UUID;
 
 public class Installation {
-    private static String sID = null;
     private static final String INSTALLATION = "INSTALLATION";
+    private static String sID = null;
 
     public synchronized static String id(Context context) {
         if (sID == null) {

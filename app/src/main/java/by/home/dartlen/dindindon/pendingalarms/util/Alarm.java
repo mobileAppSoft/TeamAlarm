@@ -6,13 +6,7 @@ import androidx.room.Entity;
 public class Alarm {
 
 
-
-
     private long time;
-
-
-
-
 
 
     public Alarm() {
@@ -26,7 +20,6 @@ public class Alarm {
     public void setTime(long time) {
         this.time = time;
     }
-
 
 
 }

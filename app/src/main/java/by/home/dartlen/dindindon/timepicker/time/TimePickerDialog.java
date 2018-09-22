@@ -742,7 +742,6 @@ public class TimePickerDialog extends AppCompatDialogFragment implements
         }
 
 
-
         Resources res = getResources();
         Context context = getActivity();
         mHourPickerDescription = "";
@@ -1125,7 +1124,6 @@ public class TimePickerDialog extends AppCompatDialogFragment implements
     public void onStop() {
         super.onStop();
     }
-
 
 
     @Override

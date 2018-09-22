@@ -1,12 +1,9 @@
 package by.home.dartlen.dindindon.main
 
-import android.accounts.AccountManager
 import android.app.AlarmManager
 import android.app.PendingIntent
-import android.content.Context
 import android.content.Context.ALARM_SERVICE
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -98,12 +95,12 @@ class MainFragment : Fragment(), TimePickerDialog.OnTimeSetListener,
         dialog.dismiss()
     }
 
-     fun saveAlarms( timeStamp: Long) {
+    fun saveAlarms(timeStamp: Long) {
 //         FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         val database = FirebaseDatabase.getInstance()
         // database.setPersistenceEnabled(true);
-        val myRef = database.getReference("user_alarms/"+ by.home.dartlen.dindindon.pendingalarms.util.Installation.id(activity!!.applicationContext)+"/alarms/")
-        myRef.push().setValue(timeStamp/1000)
+        val myRef = database.getReference("user_alarms/" + by.home.dartlen.dindindon.pendingalarms.util.Installation.id(activity!!.applicationContext) + "/alarms/")
+        myRef.push().setValue(timeStamp / 1000)
                 .addOnSuccessListener {
                     Log.d("alarm", "writed")
                 }.addOnFailureListener {
@@ -120,7 +117,7 @@ class MainFragment : Fragment(), TimePickerDialog.OnTimeSetListener,
     }
 
     override fun shareAlarm() {
-      // activity.getSupportFragmentManager().beginTransaction().add(R.id.container, userFrag).commit();
+        // activity.getSupportFragmentManager().beginTransaction().add(R.id.container, userFrag).commit();
     }
 
 

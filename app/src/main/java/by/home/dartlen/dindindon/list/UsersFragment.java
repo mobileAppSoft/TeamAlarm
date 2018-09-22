@@ -1,5 +1,7 @@
 package by.home.dartlen.dindindon.list;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,13 +14,19 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.json.JSONArray;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import by.home.dartlen.dindindon.FCMSender;
 import by.home.dartlen.dindindon.R;
+
+import static by.home.dartlen.dindindon.Constants.PREFS_FILENAME;
+import static by.home.dartlen.dindindon.Constants.TIME_ALARM;
 
 public class UsersFragment extends Fragment
         implements PersonsAdapter.NotesAdapterInteraction {
@@ -28,15 +36,6 @@ public class UsersFragment extends Fragment
     View mRootView;
     int pageNumber;
     private PersonsAdapter mPersonsAdapter;
-
-    static UsersFragment newInstance(Person currentPlace) {
-        UsersFragment pageFragment = new UsersFragment();
-        if (currentPlace == null) return pageFragment;
-        Bundle arguments = new Bundle(); //Опция для подсветки выбранного
-        // arguments.putInt(ARGUMENT_ID, 5);
-        pageFragment.setArguments(arguments);
-        return pageFragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,6 +52,19 @@ public class UsersFragment extends Fragment
         getNoteList();
         rootView.findViewById(R.id.btn_send).setOnClickListener(v -> {
                     if (mPersonsAdapter == null) return;
+                    FCMSender fcm = new FCMSender();
+                    JSONArray x = new JSONArray();
+                    List<Person> list = mPersonsAdapter.getSelected();
+                    for (int i = 0; i < list.size(); i++) {
+                        x.put(list.get(i).getToken());
+                    }
+
+                    Context context = getActivity();
+                    SharedPreferences sharedPref = context.getSharedPreferences(
+                            PREFS_FILENAME, Context.MODE_PRIVATE);
+
+                    fcm.FcmSend(x, "alarm", "alarm", sharedPref.getLong(TIME_ALARM, 1L) + "");
+
                 }
         );
         return rootView;

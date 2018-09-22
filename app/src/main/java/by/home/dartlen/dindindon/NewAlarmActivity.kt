@@ -5,17 +5,27 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.AlarmManagerCompat
+import androidx.navigation.Navigation
+import by.home.dartlen.dindindon.Constants.PREFS_FILENAME
+import by.home.dartlen.dindindon.Constants.TIME_ALARM
 import by.home.dartlen.dindindon.timepicker.time.TimePickerDialog
 import java.util.*
+import android.view.ViewGroup
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment.findNavController
+
 
 class NewAlarmActivity : AppCompatActivity(), TimePickerDialog.OnMinuteSelectedListener, TimePickerDialog.OnClickedPendingAlarms, TimePickerDialog.OnTimeSetListener, TimePickerDialog.OnHourSelectedListener, TimePickerDialog.OnClickedShareAlarm, TimePickerDialog.OnOkListener {
 
-    lateinit var dialog:TimePickerDialog
+    lateinit var dialog: TimePickerDialog
     var mHour: Int = 0
     var mMinute: Int = 0
+    lateinit var navController:NavController
+
     override fun onOkListener() {
         val intent = Intent(this, AlarmActivity::class.java.javaClass)
         val pendingIntent = PendingIntent.getActivity(this, 1488,
@@ -33,8 +43,19 @@ class NewAlarmActivity : AppCompatActivity(), TimePickerDialog.OnMinuteSelectedL
     }
 
     override fun shareAlarm() {
-        val intent = Intent(this, MainActivity::class.java)
+        val prefs = this.getSharedPreferences(PREFS_FILENAME, 0)
 
+        val c = Calendar.getInstance()
+        c.set(Calendar.HOUR_OF_DAY, mHour)
+        c.set(Calendar.MINUTE, mMinute)
+        c.set(Calendar.SECOND, 0)
+
+        val editor = prefs!!.edit()
+        editor.putLong(TIME_ALARM, c.timeInMillis)
+        editor.apply()
+
+
+        val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
 
@@ -48,6 +69,7 @@ class NewAlarmActivity : AppCompatActivity(), TimePickerDialog.OnMinuteSelectedL
 
     override fun onPendingAlarms() {
 
+        navController.navigate(R.id.pendingAlarms, null)
     }
 
     override fun onMinuteSelected(minute: Int) {
@@ -61,7 +83,6 @@ class NewAlarmActivity : AppCompatActivity(), TimePickerDialog.OnMinuteSelectedL
 
         dialog = TimePickerDialog.newInstance(this, this,
                 this, this, this, this, true)
-
         supportFragmentManager.beginTransaction().add(dialog, "dialog").commit()
     }
 

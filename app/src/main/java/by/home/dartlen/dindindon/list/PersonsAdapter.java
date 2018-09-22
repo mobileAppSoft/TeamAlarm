@@ -89,6 +89,10 @@ public class PersonsAdapter extends RecyclerView.Adapter<PersonsAdapter.ViewHold
         return mPersonList.size();
     }
 
+    public List<Person> getSelected() {
+        return selected;
+    }
+
     public interface NotesAdapterInteraction {
         void onClickItem(Person person);
     }

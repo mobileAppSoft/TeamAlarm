@@ -26,8 +26,8 @@
 
         <activity
             android:name=".NewAlarmActivity"
-            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"
-            android:excludeFromRecents="true">
+            android:excludeFromRecents="true"
+            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
